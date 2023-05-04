@@ -61,6 +61,7 @@ const DatePicker = props => {
   const style = styles(contextValue.options);
 
   const renderBody = () => {
+    console.log('Render body: ', contextValue.mode);
     switch (contextValue.mode) {
       default:
       case 'datepicker':
