@@ -63,7 +63,7 @@ const SelectMonth = ({hideYear}) => {
       });
       month !== null && onMonthYearChange(utils.getFormated(activeDate, 'monthYearFormat'));
       month !== null &&
-        mode !== 'monthYear' &&
+        mode !== 'monthYear' && mode !== 'dayMonth' &&
         setMainState({
           type: 'toggleMonth',
         });
@@ -108,7 +108,7 @@ const SelectMonth = ({hideYear}) => {
 
   return show ? (
     <Animated.View style={containerStyle}>
-      <View style={[style.header, I18nManager.isRTL && style.reverseHeader]}>
+      {!hideYear && <View style={[style.header, I18nManager.isRTL && style.reverseHeader]}>
         <TouchableOpacity
           activeOpacity={0.7}
           style={style.arrowWrapper}
@@ -118,8 +118,7 @@ const SelectMonth = ({hideYear}) => {
             style={[style.arrow, style.leftArrow, nextDisable && style.disableArrow]}
           />
         </TouchableOpacity>
-        {!hideYear &&
-        <>
+
             <TextInput
               style={style.yearInput}
               keyboardType="numeric"
@@ -142,8 +141,8 @@ const SelectMonth = ({hideYear}) => {
               style={[style.arrow, prevDisable && style.disableArrow]}
             />
           </TouchableOpacity>
-        </>}
-      </View>
+
+      </View> }
 
       <View style={[style.monthList, utils.flexDirection]}>
         {[...Array(12).keys()].map(item => {
