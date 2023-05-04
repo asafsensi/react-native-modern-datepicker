@@ -78,8 +78,9 @@ const DatePicker = props => {
             <SelectMonth />
           </React.Fragment>
         );
+      case 'dayMonth':
       case 'monthYear':
-        return <SelectMonth />;
+        return <SelectMonth hideYear={contextValue.mode === 'dayMonth'} />;
       case 'time':
         return <SelectTime />;
     }
@@ -121,7 +122,7 @@ const optionsShape = {
   headerAnimationDistance: PropTypes.number,
   daysAnimationDistance: PropTypes.number,
 };
-const modeArray = ['datepicker', 'calendar', 'monthYear', 'time'];
+const modeArray = ['datepicker', 'calendar', 'monthYear', 'time', 'dayMonth'];
 const minuteIntervalArray = [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60];
 
 DatePicker.defaultProps = {

@@ -13,7 +13,7 @@ import {
 
 import {useCalendar} from '../DatePicker';
 
-const SelectMonth = () => {
+const SelectMonth = ({hideYear}) => {
   const {
     options,
     state,
@@ -118,28 +118,31 @@ const SelectMonth = () => {
             style={[style.arrow, style.leftArrow, nextDisable && style.disableArrow]}
           />
         </TouchableOpacity>
-        <TextInput
-          style={style.yearInput}
-          keyboardType="numeric"
-          maxLength={4}
-          value={year}
-          onBlur={() => onSelectYear(0)}
-          underlineColorAndroid={'rgba(0,0,0,0)'}
-          returnKeyType="done"
-          autoCorrect={false}
-          blurOnSubmit
-          selectionColor={options.mainColor}
-          onChangeText={onChangeYear}
-        />
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={style.arrowWrapper}
-          onPress={() => !prevDisable && onSelectYear(+1)}>
-          <Image
-            source={require('../../assets/arrow.png')}
-            style={[style.arrow, prevDisable && style.disableArrow]}
+        {!hideYear &&
+        <>
+            <TextInput
+              style={style.yearInput}
+              keyboardType="numeric"
+              maxLength={4}
+              value={year}
+              onBlur={() => onSelectYear(0)}
+              underlineColorAndroid={'rgba(0,0,0,0)'}
+              returnKeyType="done"
+              autoCorrect={false}
+              blurOnSubmit
+              selectionColor={options.mainColor}
+              onChangeText={onChangeYear}
           />
-        </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={style.arrowWrapper}
+            onPress={() => !prevDisable && onSelectYear(+1)}>
+            <Image
+              source={require('../../assets/arrow.png')}
+              style={[style.arrow, prevDisable && style.disableArrow]}
+            />
+          </TouchableOpacity>
+        </>}
       </View>
 
       <View style={[style.monthList, utils.flexDirection]}>
